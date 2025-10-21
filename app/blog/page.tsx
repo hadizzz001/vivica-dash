@@ -56,7 +56,7 @@ const ManageProject = () => {
     });
 
     if (res.ok) {
-      setMessage('Project added successfully!');
+      setMessage('Blog added successfully!');
       setFormData({
         title: '', 
         author: '', 
@@ -86,7 +86,7 @@ const ManageProject = () => {
       });
 
       if (res.ok) {
-        setMessage('Project updated!');
+        setMessage('Blog updated!');
         setEditMode(false);
         setEditFormData({
           id: '',
@@ -107,13 +107,13 @@ const ManageProject = () => {
   };
 
   const handleDelete = async (id) => {
-    if (confirm('Are you sure you want to delete this project?')) {
+    if (confirm('Are you sure you want to delete this Blog?')) {
       try {
         const res = await fetch(`/api/blog/${encodeURIComponent(id)}`, {
           method: 'DELETE',
         });
         if (res.ok) {
-          setMessage('Project deleted!');
+          setMessage('Blog deleted!');
           window.location.href = '/blog';
         } else {
           const errorData = await res.json();
@@ -136,30 +136,7 @@ const ManageProject = () => {
 
 
 
-
-const getSortOptions = () => {
-  const total = projects.length;
-  return Array.from({ length: total }, (_, i) => i + 1);
-};
-
-const handleSortChange = async (id, newSort) => {
-  try {
-    const res = await fetch(`/api/blog/${encodeURIComponent(id)}`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ sort: parseInt(newSort, 10) }),
-    });
-
-    if (res.ok) {
-      await fetchProjects(); // Re-fetch to update the UI
-    } else {
-      const errorData = await res.json();
-      console.error('Error:', errorData.error);
-    }
-  } catch (error) {
-    console.error('Error:', error);
-  }
-};
+ 
 
 
 
@@ -206,19 +183,18 @@ const handleSortChange = async (id, newSort) => {
  
 
         <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
-          {editMode ? 'Update Project' : 'Add Project'}
+          {editMode ? 'Update Blog' : 'Add Blog'}
         </button>
       </form>
 
       {message && <p className="mt-4 text-red-500">{message}</p>}
 
-      <h2 className="text-xl font-bold mt-8">All Projects</h2>
+      <h2 className="text-xl font-bold mt-8">All Blogs</h2>
       <table className="table-auto w-full border mt-4">
         <thead>
           <tr>
             <th className="border p-2">Title</th>
-            <th className="border p-2">Author</th>
-            <th className="border p-2">Sort</th>
+            <th className="border p-2">Author</th> 
             <th className="border p-2">Archive</th>
             <th className="border p-2">Actions</th>
           </tr>
@@ -229,19 +205,7 @@ const handleSortChange = async (id, newSort) => {
       <tr key={project.id}>
         <td className="border p-2">{project.title}</td>
         <td className="border p-2">{project.author}</td>
-        <td className="border p-2">
-          <select
-            value={project.sort}
-            onChange={(e) => handleSortChange(project.id, e.target.value)}
-            className="border px-2 py-1 rounded"
-          >
-            {getSortOptions().map((num) => (
-              <option key={num} value={num}>
-                {num}
-              </option>
-            ))}
-          </select>
-        </td>
+        
                         <td className="border p-2">
   {project.archive == null ? "no" : project.archive}
 </td>

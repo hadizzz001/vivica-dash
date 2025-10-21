@@ -9,8 +9,7 @@ export async function PATCH(request, { params }) {
     author      ,
     title       ,
     description ,
-    img         ,
-    sort         ,
+    img         , 
     archive,
      
   } = await request.json();
@@ -26,8 +25,7 @@ export async function PATCH(request, { params }) {
         author      ,
         title       ,
         description ,
-        img         ,
-        sort         ,
+        img         , 
         archive,
       },
     });
@@ -66,4 +64,3 @@ export async function DELETE(request, { params }) {
     );
   }
 }
-

@@ -9,20 +9,14 @@ const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 const ManageProject = () => {
   const [formData, setFormData] = useState({
     name: '',
-    son: '',
-    age: '',
     description: '',
-    attend: '',
     archive: 'no',
   });
 
   const [editFormData, setEditFormData] = useState({
     id: '',
     name: '',
-    son: '',
-    age: '',
     description: '',
-    attend: '',
     archive: 'no',
   });
 
@@ -37,7 +31,7 @@ const ManageProject = () => {
         const data = await res.json();
         setProjects(data);
       } else {
-        console.error('Failed to fetch projects');
+        console.error('Failed to fetch Review');
       }
     } catch (error) {
       console.error('Error:', error);
@@ -58,15 +52,8 @@ const ManageProject = () => {
     });
 
     if (res.ok) {
-      setMessage('Project added successfully!');
-      setFormData({
-        name: '',
-        son: '',
-        age: '',
-        description: '',
-        attend: '',
-        archive: 'no',
-      });
+      setMessage('Review added successfully!');
+      setFormData({ name: '', description: '', archive: 'no' });
       fetchProjects();
     } else {
       const errorData = await res.json();
@@ -89,17 +76,9 @@ const ManageProject = () => {
       });
 
       if (res.ok) {
-        setMessage('Project updated!');
+        setMessage('Review updated!');
         setEditMode(false);
-        setEditFormData({
-          id: '',
-          name: '',
-          son: '',
-          age: '',
-          description: '',
-          attend: '',
-          archive: 'no',
-        });
+        setEditFormData({ id: '', name: '', description: '', archive: 'no' });
         fetchProjects();
       } else {
         const errorData = await res.json();
@@ -111,13 +90,11 @@ const ManageProject = () => {
   };
 
   const handleDelete = async (id) => {
-    if (confirm('Are you sure you want to delete this project?')) {
+    if (confirm('Are you sure you want to delete this Review?')) {
       try {
-        const res = await fetch(`/api/review/${encodeURIComponent(id)}`, {
-          method: 'DELETE',
-        });
+        const res = await fetch(`/api/review/${encodeURIComponent(id)}`, { method: 'DELETE' });
         if (res.ok) {
-          setMessage('Project deleted!');
+          setMessage('Review deleted!');
           fetchProjects();
         } else {
           const errorData = await res.json();
@@ -138,41 +115,22 @@ const ManageProject = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">
-        {editMode ? 'Edit Project' : 'Add Project'}
-      </h1>
+      <h1 className="text-2xl font-bold mb-4">{editMode ? 'Edit Review' : 'Add Review'}</h1>
 
       <form onSubmit={editMode ? handleEditSubmit : handleSubmit} className="space-y-4">
-        {['name', 'son', 'age'].map((field) => (
-          <div key={field}>
-            <label className="block mb-1 capitalize">{field}</label>
-            <input
-              type="text"
-              className="border p-2 w-full"
-              value={currentForm[field]}
-              onChange={(e) => updateField(field, e.target.value)}
-              required
-            />
-          </div>
-        ))}
-
-        {/* Attend dropdown */}
+        {/* Name */}
         <div>
-          <label className="block mb-1">Attend</label>
-          <select
+          <label className="block mb-1 capitalize">Name</label>
+          <input
+            type="text"
             className="border p-2 w-full"
-            value={currentForm.attend}
-            onChange={(e) => updateField('attend', e.target.value)}
+            value={currentForm.name}
+            onChange={(e) => updateField('name', e.target.value)}
             required
-          >
-            <option value="">Select an option</option>
-            <option value="Course">Course</option>
-            <option value="Workshop">Workshop</option>
-            <option value="Camp">Camp</option>
-          </select>
+          />
         </div>
 
-        {/* Description textarea */}
+        {/* Description */}
         <div>
           <label className="block mb-1">Description</label>
           <textarea
@@ -183,7 +141,7 @@ const ManageProject = () => {
           />
         </div>
 
-        {/* Archive checkbox */}
+        {/* Archive */}
         <div className="flex items-center space-x-2">
           <input
             type="checkbox"
@@ -196,20 +154,18 @@ const ManageProject = () => {
         </div>
 
         <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
-          {editMode ? 'Update Project' : 'Add Project'}
+          {editMode ? 'Update Review' : 'Add Review'}
         </button>
       </form>
 
       {message && <p className="mt-4 text-red-500">{message}</p>}
 
-      <h2 className="text-xl font-bold mt-8">All Projects</h2>
+      <h2 className="text-xl font-bold mt-8">All Review</h2>
       <table className="table-auto w-full border mt-4">
         <thead>
           <tr>
             <th className="border p-2">Name</th>
-            <th className="border p-2">Son</th>
-            <th className="border p-2">Age</th>
-            <th className="border p-2">Attend</th>
+            <th className="border p-2">Description</th>
             <th className="border p-2">Archive</th>
             <th className="border p-2">Actions</th>
           </tr>
@@ -219,12 +175,8 @@ const ManageProject = () => {
             projects.map((project) => (
               <tr key={project.id}>
                 <td className="border p-2">{project.name}</td>
-                <td className="border p-2">{project.son}</td>
-                <td className="border p-2">{project.age}</td>
-                <td className="border p-2">{project.attend}</td>
-                <td className="border p-2">
-                  {project.archive == null ? 'no' : project.archive}
-                </td>
+                <td className="border p-2">{project.description}</td>
+                <td className="border p-2">{project.archive ?? 'no'}</td>
                 <td className="border p-2 text-center">
                   <button
                     onClick={() => handleEdit(project)}
@@ -243,9 +195,7 @@ const ManageProject = () => {
             ))
           ) : (
             <tr>
-              <td colSpan={6} className="text-center p-4">
-                No projects found.
-              </td>
+              <td colSpan={4} className="text-center p-4">No Review found.</td>
             </tr>
           )}
         </tbody>

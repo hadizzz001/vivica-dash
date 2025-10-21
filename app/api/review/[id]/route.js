@@ -6,11 +6,8 @@ const prisma = new PrismaClient();
 export async function PATCH(request, { params }) {
   const { id } = params;
   const {
-    name,
-    son,
-    age,
-    description,
-    attend,
+    name, 
+    description, 
     archive,
 
   } = await request.json();
@@ -22,12 +19,9 @@ export async function PATCH(request, { params }) {
     const updatedProduct = await prisma.review.update({
       where: { id },
       data: {
-        name,
-        son,
-        age,
-        description,
-        attend,
-        archive,
+    name, 
+    description, 
+    archive,
       },
     });
 

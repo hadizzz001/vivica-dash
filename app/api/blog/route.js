@@ -9,8 +9,7 @@ export async function POST(req) {
       author      ,
       title       ,
       description ,
-      img         ,
-      sort         ,
+      img         , 
       archive,
       } = body;
 
@@ -23,8 +22,7 @@ console.log("body are: ",body);
         author      ,
         title       ,
         description ,
-        img         ,
-        sort         ,
+        img         , 
         archive,
       },
     });

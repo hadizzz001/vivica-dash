@@ -6,18 +6,11 @@ const prisma = new PrismaClient();
 export async function PATCH(request, { params }) {
   const { id } = params;
   const {
-    title       ,
-    subtitle    ,
-    student     ,
-    age         ,
-    description ,
-    img         ,
-    video       ,
-    course       ,
-    game       ,
-    level       ,
-    skills       ,
-    archive       ,
+  title,    
+  description,
+  img,  
+  video,  
+  archive,
      
   } = await request.json();
 
@@ -29,18 +22,11 @@ export async function PATCH(request, { params }) {
     const updatedProduct = await prisma.project.update({
       where: { id },
       data: {
-        title       ,
-        subtitle    ,
-        student     ,
-        age         ,
-        description ,
-        img         ,
-        video       ,
-        course       ,
-        game       ,
-        level       ,
-        skills       ,
-        archive       ,
+  title,    
+  description,
+  img,  
+  video,  
+  archive,
       },
     });
 

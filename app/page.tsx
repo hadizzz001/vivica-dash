@@ -18,7 +18,7 @@ export default function Home() {
       const { data } = await axios.post("/api/auth/login", payload);
 
       alert(JSON.stringify(data));
-      window.location.replace("/dashboard");
+      window.location.replace("/project");
     } catch (e) {
       const error = e as AxiosError;
 
@@ -46,7 +46,7 @@ export default function Home() {
       {/* Logo Section */}
       <div className="flex justify-center mb-6">
         <img
-          src="https://res.cloudinary.com/dgkndndub/image/upload/v1746524718/LOGO-removebg-preview_pqiiib.png"
+          src="https://res.cloudinary.com/duln5xyix/image/upload/v1760189999/white_tq7ghw.webp"
           className="w-40 sm:w-48"
           alt="Sample image"
         />

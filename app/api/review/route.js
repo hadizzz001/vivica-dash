@@ -8,11 +8,8 @@ export async function POST(req) {
   try {
     const body = await req.json();
     const {   
-    name,
-    son,
-    age,
-    description,
-    attend,
+    name, 
+    description, 
     archive,
       } = body;
 
@@ -22,11 +19,8 @@ console.log("body are: ",body);
 
     const product = await prisma.review.create({
       data: {
-    name,
-    son,
-    age,
-    description,
-    attend,
+    name, 
+    description, 
     archive,
       },
     });

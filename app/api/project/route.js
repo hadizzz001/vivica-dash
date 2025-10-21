@@ -6,18 +6,11 @@ export async function POST(req) {
   try {
     const body = await req.json();
     const {   
-      title       ,
-      subtitle    ,
-      student     ,
-      age         ,
-      description ,
-      img         ,
-      video       ,
-      course       ,
-      game       ,
-      level       ,
-      skills       ,
-      archive       ,
+  title,    
+  description,
+  img,  
+  video,  
+  archive,
       } = body;
 
 console.log("body are: ",body);
@@ -26,18 +19,11 @@ console.log("body are: ",body);
 
     const product = await prisma.project.create({
       data: {
-        title       ,
-        subtitle    ,
-        student     ,
-        age         ,
-        description ,
-        img         ,
-        video       ,
-        course       ,
-        game       ,
-        level       ,
-        skills       ,
-        archive       ,
+  title,    
+  description,
+  img,  
+  video,  
+  archive,
       },
     });
 

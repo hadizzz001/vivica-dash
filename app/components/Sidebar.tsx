@@ -29,71 +29,22 @@ export default function Sidebar() {
         <div>
           <h3 style={{ textAlign: "center" }}>Dashboard</h3>
           <ul style={{ padding: 0, marginTop: "20px", listStyle: "none" }}>
-            <li style={{ marginBottom: "15px" }}>
-              <a href="/dashboard" style={{ color: "white", textDecoration: "none", whiteSpace: "nowrap" }}>
-                All Courses
-              </a>
-            </li>
-            <li>
-              <a href="/products" style={{ color: "white", textDecoration: "none", whiteSpace: "nowrap" }}>
-                Add Courses
-              </a>
-            </li>
-            <li>
-              <a href="/category" style={{ color: "white", textDecoration: "none" , whiteSpace: "nowrap" }}>
-                Add Courses Category
-              </a>
-            </li>    
-            <li>
-              <a href="/sub" style={{ color: "white", textDecoration: "none" , whiteSpace: "nowrap"}}>
-                Add Courses Subcategory
-              </a>
-            </li>    
-            <li>
-              <a href="/banner" style={{ color: "white", textDecoration: "none", whiteSpace: "nowrap" }}>
-                Home Banner
-              </a>
-            </li>  
+ 
             <li>
               <a href="/project" style={{ color: "white", textDecoration: "none", whiteSpace: "nowrap" }}>
-                Projects
+                Services
               </a>
-            </li>  
+            </li>
             <li>
               <a href="/blog" style={{ color: "white", textDecoration: "none", whiteSpace: "nowrap" }}>
                 Blogs
               </a>
-            </li>  
+            </li>
             <li>
-              <a href="/team" style={{ color: "white", textDecoration: "none", whiteSpace: "nowrap" }}>
-                Teams
-              </a>
-            </li>  
-            <li>
-              <a href="/faq" style={{ color: "white", textDecoration: "none", whiteSpace: "nowrap" }}>
-                FAQ
-              </a>
-            </li>  
-            <li>
-              <a href="/brand" style={{ color: "white", textDecoration: "none" , whiteSpace: "nowrap"}}>
-                Brands
-              </a>
-            </li>   
-            <li>
-              <a href="/work" style={{ color: "white", textDecoration: "none" , whiteSpace: "nowrap"}}>
-                Work Applicants
-              </a>
-            </li>   
-            <li>
-              <a href="/coll" style={{ color: "white", textDecoration: "none" , whiteSpace: "nowrap"}}>
-                Collaborations Data
-              </a>
-            </li>   
-            <li>
-              <a href="/review" style={{ color: "white", textDecoration: "none" , whiteSpace: "nowrap"}}>
+              <a href="/review" style={{ color: "white", textDecoration: "none", whiteSpace: "nowrap" }}>
                 Reviews
               </a>
-            </li>   
+            </li>
             <li>
               <a href="/" style={{ color: "white", textDecoration: "none" }}>
                 Logout
@@ -126,10 +77,10 @@ export default function Sidebar() {
       {/* Spacer to push content */}
       <div style={{ marginLeft: isOpen ? "200px" : "0", transition: "margin-left 0.3s ease-in-out" }} />
       <style
-  dangerouslySetInnerHTML={{
-    __html: "\n  a {\n    color: #fff !important;\n}\n"
-  }}
-/>
+        dangerouslySetInnerHTML={{
+          __html: "\n  a {\n    color: #fff !important;\n}\n"
+        }}
+      />
 
     </div>
   );
