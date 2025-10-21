@@ -1,0 +1,116 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Project {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  subtitle    String
+  course      String
+  student     String
+  age         String
+  level       String?
+  game        String?
+  skills      String?
+  description String
+  img         String[]
+  video       String[]
+  archive     String?  @default("no")
+}
+
+model Course {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  level       String
+  duration    Json
+  age         Json
+  category    String
+  sessions    String?
+  pair        String?
+  group       String?
+  pre         String?
+  subcategory String?
+  subtitle    String?
+  description String
+  img         String[]
+  soon        String?  @default("no")
+  archive     String?  @default("no")
+}
+
+model Blog {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  author      String
+  title       String
+  description String
+  sort        Int?
+  img         String[]
+  date        DateTime @default(now()) @db.Date
+  archive     String?  @default("no")
+}
+
+model Team {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  position    String
+  category    String
+  description String
+  img         String[]
+  archive     String?  @default("no")
+}
+
+model Brand {
+  id  String   @id @default(auto()) @map("_id") @db.ObjectId
+  img String[]
+}
+
+model Category {
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  name String @unique
+}
+
+model Subcategory {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  name     String @unique
+  category String
+}
+
+model Review {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  son         String
+  age         String
+  description String 
+  attend      String
+  archive     String? @default("no")
+}
+
+model Faq {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  question String
+  answer   String
+}
+
+model Coll {
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  data Json
+}
+
+model Work {
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  data Json
+}
+
+model Banner {
+  id    String   @id @default(auto()) @map("_id") @db.ObjectId
+  img   String[]
+  title String
+  sub   String
+  desc  String
+  btn1  String
+  btn2  String
+}
