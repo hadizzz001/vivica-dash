@@ -2,66 +2,76 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-// Update Product API
+// Handle OPTIONS request for CORS preflight
+export async function OPTIONS() {
+  return new Response(null, {
+    status: 204,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "PATCH, DELETE, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization",
+    },
+  });
+}
+
+// Update Project API
 export async function PATCH(request, { params }) {
   const { id } = params;
-  const {
-  title,    
-  description,
-  img,  
-  video,  
-  archive,
-     
-  } = await request.json();
+  const { title, description, img, video, archive } = await request.json();
 
   console.log("imgs are: ", img);
-  
 
   try {
-    // Update product and its specifications
-    const updatedProduct = await prisma.project.update({
+    const updatedProject = await prisma.project.update({
       where: { id },
-      data: {
-  title,    
-  description,
-  img,  
-  video,  
-  archive,
-      },
+      data: { title, description, img, video, archive },
     });
 
-    return new Response(JSON.stringify(updatedProduct), { status: 200 });
+    return new Response(JSON.stringify(updatedProject), {
+      status: 200,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "PATCH, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization",
+      },
+    });
   } catch (error) {
-    console.error('Error updating product:', error);
-    return new Response(
-      JSON.stringify({ error: 'Failed to update product' }),
-      { status: 500 }
-    );
+    console.error('Error updating project:', error);
+    return new Response(JSON.stringify({ error: 'Failed to update project' }), {
+      status: 500,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "PATCH, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization",
+      },
+    });
   }
 }
 
-// Delete Product API
+// Delete Project API
 export async function DELETE(request, { params }) {
   const { id } = params;
 
   try {
- 
+    await prisma.project.delete({ where: { id } });
 
-    // Delete the product
-    await prisma.project.delete({
-      where: { id },
+    return new Response(JSON.stringify({ message: 'Project deleted successfully' }), {
+      status: 200,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "PATCH, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization",
+      },
     });
-
-    return new Response(
-      JSON.stringify({ message: 'Product deleted successfully' }),
-      { status: 200 }
-    );
   } catch (error) {
-    console.error('Error deleting product:', error);
-    return new Response(
-      JSON.stringify({ error: 'Failed to delete product' }),
-      { status: 500 }
-    );
+    console.error('Error deleting project:', error);
+    return new Response(JSON.stringify({ error: 'Failed to delete project' }), {
+      status: 500,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "PATCH, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization",
+      },
+    });
   }
 }
-
