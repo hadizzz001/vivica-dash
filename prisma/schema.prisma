@@ -46,6 +46,6 @@ model Order {
   subject String 
   message String 
   cat String 
-  date        DateTime @default(now()) @db.Date
+  date        String?
 }
  

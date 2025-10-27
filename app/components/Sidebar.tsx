@@ -41,8 +41,8 @@ export default function Sidebar() {
               </a>
             </li>
             <li>
-              <a href="/review" style={{ color: "white", textDecoration: "none", whiteSpace: "nowrap" }}>
-                Reviews
+              <a href="/reservation" style={{ color: "white", textDecoration: "none", whiteSpace: "nowrap" }}>
+                Reservations
               </a>
             </li>
             <li>
