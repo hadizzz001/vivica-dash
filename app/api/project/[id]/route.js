@@ -58,14 +58,14 @@ export async function GET(request, { params }) {
 // Update Project API
 export async function PATCH(request, { params }) {
   const { id } = params;
-  const { title, description, img, video, archive } = await request.json();
+  const { title, description, img, img1, video, archive } = await request.json();
 
   console.log("imgs are: ", img);
 
   try {
     const updatedProject = await prisma.project.update({
       where: { id },
-      data: { title, description, img, video, archive },
+      data: { title, description, img, img1, video, archive },
     });
 
     return new Response(JSON.stringify(updatedProject), {

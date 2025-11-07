@@ -4,18 +4,21 @@ import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import Upload from '../components/Upload';
 import Upload1 from '../components/Upload1';
+import Upload2 from '../components/Upload2';
 import 'react-quill/dist/quill.snow.css';
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
 const ManageProject = () => {
-  const [formData, setFormData] = useState({
-    title: '',
-    description: '',
-    img: '',
-    video: '',
-    archive: 'no',
-  });
+const [formData, setFormData] = useState({
+  title: '',
+  description: '',
+  img: '',
+  img1: '',      // ✅ NEW FIELD
+  video: '',
+  archive: 'no',
+});
+
 
   const [editMode, setEditMode] = useState(false);
   const [editProject, setEditProject] = useState(null);
@@ -52,7 +55,7 @@ const handleSubmit = async (e) => {
 
   if (res.ok) {
     setMessage('✅ Project added successfully!');
-    setFormData({ title: '', description: '', img: '', video: '', archive: 'no' });
+    setFormData({ title: '', description: '', img: '',img1: '', video: '', archive: 'no' });
     window.location.reload(); // 🔁 Hard refresh after successful submission
   } else {
     const errorData = await res.json();
@@ -148,13 +151,17 @@ const handleEditSubmit = async (e) => {
 
         {/* Image Upload */}
         <div>
-          <label className="block mb-1 font-semibold">Upload Image</label>
+          <label className="block mb-1 font-semibold">Upload Gallery Image</label>
           <Upload onImagesUpload={(url) => updateField('img', url)} />
         </div>
 
+        <div>
+ 
+  <Upload2 onImagesUpload={(url) => updateField('img1', url)} />
+</div>
+
         {/* Video Upload */}
         <div>
-          <label className="block mb-1 font-semibold">Upload Video</label>
           <Upload1 onFilesUpload={(url) => updateField('video', url)} />
         </div>
 

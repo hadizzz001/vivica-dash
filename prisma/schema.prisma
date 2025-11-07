@@ -12,6 +12,7 @@ model Project {
   title       String  
   description String
   img         String[]
+  img1         String[]
   video       String[]
   archive     String?  @default("no")
 }
@@ -33,7 +34,7 @@ model Review {
   id          String  @id @default(auto()) @map("_id") @db.ObjectId
   name        String 
   description String  
-  archive     String? @default("no")
+  stars String   
 }
 
 
@@ -49,3 +50,20 @@ model Order {
   date        String?
 }
  
+
+
+
+ model Counter {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  title       String  
+  num String
+  img         String[]  
+}
+
+
+
+ model Category {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  title       String   
+  img         String[]  
+}

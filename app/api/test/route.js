@@ -7,7 +7,7 @@ export const DELETE = async () => {
   try {
     await prisma.$connect();  // ✅ DIRECT CONNECT HERE
 
-    const result = await prisma.order.deleteMany(); 
+    const result = await prisma.review.deleteMany(); 
 
     return NextResponse.json({
       message: "All orders deleted successfully",

@@ -18,12 +18,12 @@ export async function OPTIONS() {
 export async function POST(req) {
   try {
     const body = await req.json();
-    const { title, description, img, video, archive } = body;
+    const { title, description, img, img1, video, archive } = body;
 
     console.log("body are: ", body);
 
     const product = await prisma.project.create({
-      data: { title, description, img, video, archive },
+      data: { title, description, img, img1, video, archive },
     });
 
     return new Response(JSON.stringify({ message: 'Project created successfully', product }), {
