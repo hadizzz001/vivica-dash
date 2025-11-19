@@ -14,10 +14,12 @@ const [formData, setFormData] = useState({
   title: '',
   description: '',
   img: '',
-  img1: '',      // ✅ NEW FIELD
+  img1: '',
   video: '',
   archive: 'no',
+  list: []        // ✅ NEW FIELD (string array)
 });
+
 
 
   const [editMode, setEditMode] = useState(false);
@@ -117,6 +119,34 @@ const handleEditSubmit = async (e) => {
 
   const currentForm = editMode ? editProject : formData;
 
+
+
+// Add new list textbox
+const addListItem = () => {
+  const updated = [...(editMode ? editProject.list : formData.list), ""];
+  updateField("list", updated);
+};
+
+// Update specific list item
+const updateListItem = (index, value) => {
+  const updated = [...(editMode ? editProject.list : formData.list)];
+  updated[index] = value;
+  updateField("list", updated);
+};
+
+// Remove a list item
+const removeListItem = (index) => {
+  const updated = [...(editMode ? editProject.list : formData.list)];
+  updated.splice(index, 1);
+  updateField("list", updated);
+};
+
+
+
+
+
+
+
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">
@@ -176,6 +206,41 @@ const handleEditSubmit = async (e) => {
           />
           <label htmlFor="archive" className="cursor-pointer">Archive</label>
         </div>
+
+        {/* List Section */}
+<div>
+  <label className="block mb-1 font-semibold">List (Multiple Points)</label>
+
+  {currentForm.list && currentForm.list.length > 0 && (
+    currentForm.list.map((item, index) => (
+      <div key={index} className="flex items-center space-x-2 mb-2">
+        <input
+          type="text"
+          className="border p-2 w-full"
+          value={item}
+          onChange={(e) => updateListItem(index, e.target.value)}
+          placeholder={`Item ${index + 1}`}
+        />
+        <button
+          type="button"
+          className="bg-red-500 text-white px-3 py-1 rounded"
+          onClick={() => removeListItem(index)}
+        >
+          X
+        </button>
+      </div>
+    ))
+  )}
+
+  <button
+    type="button"
+    onClick={addListItem}
+    className="bg-green-600 text-white px-3 py-1 rounded"
+  >
+    + Add Item
+  </button>
+</div>
+
 
         <button
           type="submit"

@@ -15,6 +15,7 @@ model Project {
   img1         String[]
   video       String[]
   archive     String?  @default("no")
+  list        String[] @default([])
 }
  
 
